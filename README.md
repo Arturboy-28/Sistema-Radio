@@ -19,4 +19,4 @@ Mockups **PNG** alineados a la referencia ChatGPT (tema oscuro web + admin SaaS)
 python3 scripts/generar_demos_cliente.py
 ```
 
-Documentación de producto: [BORRADOR.md](./BORRADOR.md)
+Documentación de producto: [BORRADOR.md](./BORRADOR.md) — incluye catálogo ampliado de módulos (testigos, portal anunciante, inventario, engagement, music scheduling, etc.).
