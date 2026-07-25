@@ -137,130 +137,183 @@ def sidebar_admin(im, active, items):
 # 01 PÁGINA WEB PÚBLICA (tema oscuro ChatGPT)
 # ═══════════════════════════════════════════════
 def demo_portal():
-    im = Image.new("RGBA", (W, H), DARK)
+    """Réplica visual de la landing ChatGPT: hero oscuro + barra media + sección blanca."""
+    PW, PH = 1600, 1900
+    im = Image.new("RGBA", (PW, PH), (12, 14, 20))
+
+    # —— fondo estudio (mezcladora) ——
+    studio = Image.open(ASSETS / "studio-bg.jpg").convert("RGBA")
+    studio = studio.resize((PW, 820), Image.Resampling.LANCZOS)
+    studio = ImageEnhance.Brightness(studio).enhance(0.45)
+    studio = studio.filter(ImageFilter.GaussianBlur(1.2))
+    im.paste(studio, (0, 0))
+    # vineta oscura
+    veil = Image.new("RGBA", (PW, 820), (8, 10, 16, 140))
+    im.alpha_composite(veil, (0, 0))
+
+    # micrófono grande a la izquierda
+    mic = Image.open(ASSETS / "mic-bg.jpg").convert("RGBA")
+    mic = mic.resize((620, 720), Image.Resampling.LANCZOS)
+    mic = ImageEnhance.Brightness(mic).enhance(0.85)
+    # fade edges
+    mask = Image.new("L", mic.size, 0)
+    md = ImageDraw.Draw(mask)
+    md.ellipse((-40, 40, 580, 700), fill=255)
+    mask = mask.filter(ImageFilter.GaussianBlur(18))
+    im.paste(mic, (-40, 80), mask)
+
     d = ImageDraw.Draw(im)
 
-    # top nav
-    d.rectangle((0, 0, W, 64), fill=(15, 20, 28))
-    lg = logo(40)
-    im.paste(lg, (28, 12), lg)
-    nav = ["Inicio", "En Vivo", "Noticias", "Programación", "Podcast", "Galería", "Contacto"]
-    x = 300
+    # —— HEADER ——
+    d.rectangle((0, 0, PW, 78), fill=(10, 12, 18, 230))
+    lg = logo(46)
+    im.paste(lg, (28, 16), lg)
+    d = ImageDraw.Draw(im)
+    nav = ["INICIO", "EN VIVO", "NOTICIAS", "PROGRAMACIÓN", "PODCAST", "LOCUTORES", "GALERÍA", "CONTACTO"]
+    x = 280
     for n in nav:
-        d.text((x, 24), n, font=F(13), fill=(209, 213, 219))
-        x += 110
-    rr(d, (1455, 14, 1570, 50), 18, RED)
-    d.text((1478, 24), "EN VIVO", font=F(13, True), fill=WHITE)
+        col = YELLOW if n == "INICIO" else (220, 225, 235)
+        d.text((x, 30), n, font=F(12, True), fill=col)
+        if n == "INICIO":
+            d.line((x, 52, x + 48, 52), fill=YELLOW, width=3)
+        x += 95
+    # social dots
+    for i in range(5):
+        d.ellipse((1280 + i * 26, 30, 1296 + i * 26, 46), outline=WHITE, width=2)
+    rr(d, (1420, 18, 1575, 60), 22, RED)
+    d.text((1440, 30), "((•)) ESCUCHAR EN VIVO", font=F(11, True), fill=WHITE)
 
-    # HERO con micrófono (crop de locutor con mic)
-    hero = talent("ramon-barrera.png", (900, 420))
-    # darken and focus
-    hero = ImageEnhance.Brightness(hero).enhance(0.55)
-    paste_r(im, hero, (0, 64), 0)
-    # left gradient panel
-    for i in range(700):
-        a = int(230 * (1 - i / 700))
-        if a > 0:
-            overlay = Image.new("RGBA", (1, 420), (*DARK, a))
-            im.paste(overlay, (i, 64), overlay)
+    # —— HERO copy ——
+    rr(d, (520, 160, 760, 195), 6, RED)
+    d.text((535, 168), "ESTÁS ESCUCHANDO", font=F(13, True), fill=WHITE)
+    d.text((520, 220), "FM 105", font=F(64, True), fill=WHITE)
+    d.text((520, 300), "EL PODER DE LA INFORMACIÓN", font=F(22, True), fill=YELLOW)
+    d.text((520, 355), "SEÑAL EN VIVO", font=F(13, True), fill=(200, 210, 220))
+    wave(d, 520, 385, 320, 36, WHITE, 34)
+    rr(d, (520, 450, 860, 515), 28, YELLOW)
+    d.text((560, 470), "▶   ESCUCHAR EN VIVO", font=F(18, True), fill=(20, 20, 28))
 
+    # —— AHORA SUENA card ——
+    card(im, (1080, 140, 1560, 560), 18, (28, 32, 42))
     d = ImageDraw.Draw(im)
-    d.text((40, 110), "FM 105", font=F(42, True), fill=WHITE)
-    d.text((40, 165), "El poder de la información", font=F(18), fill=YELLOW)
-    d.text((40, 210), "Guaymas · Empalme · San Carlos", font=F(14), fill=(180, 190, 200))
-
-    # play + waveform
-    d.ellipse((40, 270, 100, 330), fill=YELLOW)
-    d.polygon([(62, 285), (62, 315), (88, 300)], fill=DARK)
-    d.text((120, 280), "Escuchar en Vivo", font=F(18, True), fill=WHITE)
-    wave(d, 120, 310, 260, 28, YELLOW, 30)
-
-    # Al Aire card (derecha)
-    card(im, (1080, 100, 1560, 430), 14, DARK2)
+    d.text((1110, 165), "AHORA SUENA", font=F(14, True), fill=(180, 190, 200))
+    pill(d, 1110, 200, "AL AIRE", RED, WHITE)
+    d.text((1110, 245), "La Mañana en 105", font=F(24, True), fill=WHITE)
+    d.text((1110, 285), "Con Gerardo Castro", font=F(15), fill=(180, 190, 200))
+    t = talent("gerardo-castro.png", (110, 120))
+    paste_r(im, t, (1400, 230), 55)
     d = ImageDraw.Draw(im)
-    pill(d, 1110, 120, "AL AIRE", (127, 29, 29), (254, 202, 202))
-    d.text((1110, 160), "Noticiero 105", font=F(26, True), fill=WHITE)
-    t = talent("gerardo-castro.png", (90, 100))
-    paste_r(im, t, (1110, 220), 10)
-    d = ImageDraw.Draw(im)
-    d.text((1220, 235), "Gerardo Castro", font=F(16, True), fill=WHITE)
-    d.text((1220, 265), "06:00 – 10:00", font=F(13), fill=(156, 163, 175))
-    d.line((1110, 340, 1530, 340), fill=(55, 65, 80))
-    d.text((1110, 360), "Siguiente", font=F(11, True), fill=MUTED)
-    d.text((1110, 385), "Enlace 105 · Karla Montaño", font=F(14, True), fill=WHITE)
+    d.line((1110, 380, 1530, 380), fill=(55, 60, 75))
+    d.text((1110, 400), "Siguiente programa", font=F(11, True), fill=MUTED)
+    d.text((1110, 430), "Enlace 105 · Karla Montaño", font=F(15, True), fill=WHITE)
+    d.text((1110, 460), "10:00 – 14:00", font=F(13), fill=(160, 170, 185))
+    rr(d, (1110, 500, 1480, 540), 10, (45, 50, 65))
+    d.text((1140, 510), "VER PROGRAMACIÓN COMPLETA", font=F(12, True), fill=YELLOW)
 
-    # Ahora Suena
-    card(im, (40, 470, 520, 780), 12, DARK2)
+    # —— barra media interactiva ——
+    card(im, (40, 600, 1560, 720), 16, (24, 28, 38))
     d = ImageDraw.Draw(im)
-    d.text((60, 490), "Ahora Suena", font=F(16, True), fill=WHITE)
-    songs = [
-        ("09:42", "Grupo Firme", "Ya Supérame"),
-        ("09:38", "Christian Nodal", "Botella Tras Botella"),
-        ("09:34", "Peso Pluma", "Ella Baila Sola"),
-        ("09:30", "Carín León", "La Boda del Huitlacoche"),
-        ("09:26", "Banda MS", "Háblame de Ti"),
-    ]
-    y = 530
-    for tm, art, title in songs:
-        d.text((60, y), tm, font=F(12, True), fill=YELLOW)
-        d.text((120, y), art, font=F(12, True), fill=WHITE)
-        d.text((120, y + 18), title, font=F(12), fill=(156, 163, 175))
-        y += 45
+    d.text((70, 625), "SÍGUENOS", font=F(11, True), fill=MUTED)
+    for i, lab in enumerate(["FB", "IG", "X", "YT", "TK", "WA"]):
+        x = 70 + i * 48
+        d.ellipse((x, 655, x + 34, 689), fill=(45, 50, 65))
+        d.text((x + 7, 662), lab, font=F(10, True), fill=WHITE)
+
+    d.text((420, 625), "CONTACTO", font=F(11, True), fill=MUTED)
+    d.text((420, 655), "ENVÍA TU MENSAJE", font=F(14, True), fill=WHITE)
+    d.text((420, 680), "WhatsApp  622 222 0286", font=F(13, True), fill=GREEN)
+
+    d.text((820, 625), "CLIMA", font=F(11, True), fill=MUTED)
+    d.text((820, 650), "32°C  Soleado", font=F(18, True), fill=YELLOW)
+    d.text((820, 685), "Guaymas, Sonora", font=F(13), fill=(180, 190, 200))
+
+    rr(d, (1180, 635, 1345, 690), 10, (15, 23, 42))
+    d.text((1205, 655), "Google Play", font=F(13, True), fill=WHITE)
+    rr(d, (1365, 635, 1525, 690), 10, (15, 23, 42))
+    d.text((1395, 655), "App Store", font=F(13, True), fill=WHITE)
+
+    # —— sección blanca inferior ——
+    d.rectangle((0, 760, PW, PH), fill=WHITE)
 
     # Programación
-    card(im, (540, 470, 1020, 780), 12, DARK2)
-    d = ImageDraw.Draw(im)
-    d.text((560, 490), "Programación", font=F(16, True), fill=WHITE)
+    d.text((48, 800), "Programación", font=F(26, True), fill=INK)
+    d.text((48, 838), "Conoce a quienes hacen la radio", font=F(14), fill=MUTED)
     progs = [
-        ("gerardo-castro.png", "Noticiero 105", "06:00"),
-        ("karla-montano.png", "Enlace 105", "10:00"),
-        ("ivan-vaca.png", "Tarde Poderosa", "14:00"),
-        ("ramon-barrera.png", "Trayecto a Casa", "18:00"),
+        ("gerardo-castro.png", "La Mañana en 105", "Gerardo Castro", "06:00 – 10:00", "Noticias y compañía matutina."),
+        ("karla-montano.png", "Enlace 105", "Karla Montaño", "10:00 – 14:00", "Información útil y comunidad."),
+        ("ivan-vaca.png", "Tarde Poderosa", "Iván Vaca", "14:00 – 18:00", "Éxitos regionales y dinámica."),
+        ("ramon-barrera.png", "Trayecto a Casa", "Ramón Barrera", "18:00 – 21:00", "El cierre del día contigo."),
     ]
-    y = 535
-    for f, title, hour in progs:
-        t = talent(f, (48, 54))
-        paste_r(im, t, (560, y), 24)
+    for i, (f, title, host, hour, desc) in enumerate(progs):
+        x = 48 + i * 280
+        card(im, (x, 880, x + 265, 1280), 16, WHITE)
+        # photo area
+        t = talent(f, (265, 240))
+        paste_r(im, t, (x, 880), 16)
+        # cover bottom of photo round
         d = ImageDraw.Draw(im)
-        d.text((625, y + 4), title, font=F(14, True), fill=WHITE)
-        d.text((625, y + 26), hour + " hrs", font=F(12), fill=(156, 163, 175))
-        y += 58
+        d.rectangle((x, 1080, x + 265, 1280), fill=WHITE)
+        rr(d, (x, 1070, x + 265, 1280), 16, WHITE)
+        d.text((x + 16, 1095), title, font=F(16, True), fill=INK)
+        d.text((x + 16, 1125), host, font=F(13), fill=RED)
+        d.text((x + 16, 1155), hour, font=F(12, True), fill=MUTED)
+        d.text((x + 16, 1190), desc, font=F(12), fill=MUTED)
 
-    # Noticias
-    card(im, (1040, 470, 1560, 780), 12, DARK2)
-    d = ImageDraw.Draw(im)
-    d.text((1060, 490), "Noticias Destacadas", font=F(16, True), fill=WHITE)
+    # Noticias (derecha)
+    d.text((1200, 800), "Noticias Destacadas", font=F(20, True), fill=INK)
     news = [
-        (BLUE, "Reunión de gabinete en Sonora"),
-        (RED, "Alerta climática en Guaymas"),
-        (GREEN, "Triunfo local en deportes"),
-        (ORANGE, "Avance de obras públicas"),
+        ((60, 90, 140), "TURISMO", "San Carlos impulsa temporada"),
+        ((30, 120, 80), "LOCAL", "Obras en zona centro"),
+        ((20, 90, 160), "CLIMA", "Pronóstico estable en Guaymas"),
+        ((100, 40, 40), "DEPORTES", "Triunfo local en la liga"),
     ]
-    for i, (col, title) in enumerate(news):
-        col_i, row = i % 2, i // 2
-        x1 = 1060 + col_i * 240
-        y1 = 535 + row * 105
-        rr(d, (x1, y1, x1 + 220, y1 + 90), 10, (40, 48, 60))
-        rr(d, (x1, y1, x1 + 220, y1 + 40), 10, col)
-        d.rectangle((x1, y1 + 20, x1 + 220, y1 + 40), fill=col)
-        d.text((x1 + 10, y1 + 52), title, font=F(11, True), fill=WHITE)
+    y = 850
+    for col, tag, title in news:
+        card(im, (1200, y, 1560, y + 95), 12)
+        d = ImageDraw.Draw(im)
+        rr(d, (1215, y + 15, 1305, y + 80), 8, col)
+        pill(d, 1320, y + 18, tag, (254, 226, 226), RED)
+        d.text((1320, y + 48), title, font=F(13, True), fill=INK)
+        d.text((1320, y + 70), "25 jul 2026", font=F(11), fill=MUTED)
+        y += 110
 
-    # Social + apps
-    d.text((40, 810), "Síguenos", font=F(14, True), fill=WHITE)
-    for i, (name, col) in enumerate([("Facebook", BLUE), ("Instagram", RED), ("X", MUTED), ("YouTube", RED)]):
-        x = 40 + i * 130
-        rr(d, (x, 845, x + 115, 885), 10, DARK2)
-        d.text((x + 18, 855), name, font=F(12, True), fill=col)
+    # Podcasts
+    d = ImageDraw.Draw(im)
+    d.text((48, 1320), "Podcast Destacados", font=F(22, True), fill=INK)
+    for i, (title, sub, dur) in enumerate([
+        ("Entorno Informativo", "Resumen del día", "20:15"),
+        ("Radio Tianguis", "Clásicos regionales", "18:40"),
+        ("Un Día Como Hoy", "Historia local", "12:05"),
+        ("Cabina Abierta", "Entrevistas", "25:30"),
+    ]):
+        x = 48 + i * 280
+        card(im, (x, 1370, x + 265, 1580), 14, NAVY)
+        d = ImageDraw.Draw(im)
+        d.text((x + 18, 1395), title, font=F(15, True), fill=WHITE)
+        d.text((x + 18, 1425), sub, font=F(12), fill=(180, 190, 210))
+        wave(d, x + 18, 1470, 180, 28, YELLOW, 20)
+        d.ellipse((x + 210, 1465, x + 245, 1500), fill=RED)
+        d.polygon([(x + 222, 1473), (x + 222, 1492), (x + 238, 1482)], fill=WHITE)
+        d.text((x + 18, 1535), dur, font=F(13, True), fill=YELLOW)
 
-    rr(d, (700, 845, 900, 885), 10, (15, 23, 42))
-    d.text((725, 855), "Google Play", font=F(12, True), fill=WHITE)
-    rr(d, (920, 845, 1100, 885), 10, (15, 23, 42))
-    d.text((950, 855), "App Store", font=F(12, True), fill=WHITE)
+    # App promo card
+    card(im, (1200, 1320, 1560, 1720), 16, DARK)
+    d = ImageDraw.Draw(im)
+    d.text((1230, 1360), "App FM105", font=F(22, True), fill=WHITE)
+    d.text((1230, 1400), "Escucha donde vayas.\nNoticias, en vivo y más.", font=F(14), fill=(180, 190, 200))
+    # phone mini
+    rr(d, (1320, 1480, 1440, 1660), 18, (20, 20, 28))
+    rr(d, (1328, 1490, 1432, 1650), 14, NAVY)
+    d.ellipse((1360, 1545, 1400, 1585), fill=RED)
+    rr(d, (1230, 1675, 1360, 1705), 8, (30, 30, 40))
+    d.text((1245, 1682), "Google Play", font=F(11, True), fill=WHITE)
+    rr(d, (1380, 1675, 1510, 1705), 8, (30, 30, 40))
+    d.text((1400, 1682), "App Store", font=F(11, True), fill=WHITE)
 
-    # footer devices
-    d.rectangle((0, 920, W, H), fill=(15, 20, 28))
-    d.text((40, 948), "Compatible con  Web  ·  Móvil  ·  Tablet  ·  Smart TV", font=F(14, True), fill=(180, 190, 200))
-    d.text((1200, 948), "FM105 ONE  ·  Demo cliente", font=F(13, True), fill=YELLOW)
+    # footer
+    d.rectangle((0, 1760, PW, PH), fill=(12, 14, 20))
+    d.text((48, 1810), "FM105 ONE  ·  El poder de la información  ·  Guaymas, Sonora", font=F(14, True), fill=YELLOW)
+    d.text((1200, 1810), "Demo visual para cliente", font=F(13), fill=(160, 170, 185))
 
     save(im, "01-portal-publico.png")
 
