@@ -137,7 +137,7 @@ def slide_agenda(slides, total):
         ("05", "Módulos comerciales y financieros"),
         ("06", "Audiencia y canales digitales"),
         ("07", "Plataforma y gobierno"),
-        ("08", "Flujo de valor y siguientes pasos"),
+        ("08", "Flujo de valor"),
     ]
     for i, (n, t) in enumerate(items):
         col, row = i % 2, i // 2
@@ -295,30 +295,8 @@ def slide_flujo(slides, total):
         font=F(22),
         fill=WHITE,
     )
-    footer(ImageDraw.Draw(im), str(total - 2), total)
+    footer(ImageDraw.Draw(im), "11", total)
     save_slide(im, "11-flujo.png", slides)
-
-
-def slide_etapas(slides, total):
-    im = Image.new("RGBA", (W, H), GRAY)
-    header_bar(im, "Implementación por etapas", "Propuesta de adopción gradual")
-    stages = [
-        ("Etapa 1", "Operación y presencia", "Portal, streaming, programación,\nlocutores, continuidad, biblioteca,\nusuarios."),
-        ("Etapa 2", "Motor comercial", "CRM, cotizaciones, campañas,\nórdenes, inventario, rate card."),
-        ("Etapa 3", "Cumplimiento y dinero", "Logger/testigos, reconciliación,\nportal anunciante, CFDI, cobranza,\npagos, crédito, comisiones."),
-        ("Etapa 4", "Crecimiento", "KPIs avanzados, engagement,\npodcasts, radio visual, apps,\nAlexa, integraciones, whitelabel."),
-    ]
-    for i, (etag, title, body) in enumerate(stages):
-        x = 60 + i * 465
-        card(im, (x, 180, x + 440, 900), 18)
-        d = ImageDraw.Draw(im)
-        rr(d, (x, 180, x + 440, 300), 18, RED if i == 0 else NAVY)
-        d.rectangle((x, 260, x + 440, 300), fill=RED if i == 0 else NAVY)
-        d.text((x + 30, 220), etag, font=F(20, True), fill=YELLOW)
-        d.text((x + 30, 340), title, font=F(24, True), fill=NAVY)
-        d.text((x + 30, 420), body, font=F(18), fill=MUTED)
-    footer(ImageDraw.Draw(im), str(total - 1), total)
-    save_slide(im, "12-etapas.png", slides)
 
 
 def slide_cierre(slides, total):
@@ -331,11 +309,11 @@ def slide_cierre(slides, total):
     fm = load(ASSETS / "logo-fm105.png", h=100)
     paste(im, fm, (W - fm.width - 80, 80))
     d = ImageDraw.Draw(im)
-    d.text((80, 280), "Siguiente paso", font=F(22, True), fill=YELLOW)
-    d.text((80, 340), "Definamos juntos el MVP\nde su estación", font=F(52, True), fill=WHITE)
+    d.text((80, 280), "FM105 ONE", font=F(22, True), fill=YELLOW)
+    d.text((80, 340), "Sistema Integral\npara Radioemisoras", font=F(52, True), fill=WHITE)
     d.text(
-        (80, 500),
-        "Revisión de módulos prioritarios + demo visual personalizada\n+ propuesta de implementación por etapas.",
+        (80, 520),
+        "Operar el aire, vender con control, comprobar transmisión\ny crecer con datos — en una sola plataforma.",
         font=F(24),
         fill=(200, 210, 225),
     )
@@ -343,7 +321,7 @@ def slide_cierre(slides, total):
     d.text((130, 690), "Smart Apps × FM105 ONE", font=F(26, True), fill=NAVY)
     d.text((80, 900), "Gracias", font=F(36, True), fill=WHITE)
     d.text((80, 960), f"{total}/{total}", font=F(16, True), fill=YELLOW)
-    save_slide(im, "13-cierre.png", slides)
+    save_slide(im, "12-cierre.png", slides)
 
 
 def build_pdf(slides: list[Path]):
@@ -362,8 +340,15 @@ def build_pdf(slides: list[Path]):
 
 def main():
     slides: list[Path] = []
-    # Precompute total pages
-    total = 13
+    # Clean previous generated slides
+    if OUT.exists():
+        for old in OUT.glob("*.png"):
+            old.unlink()
+    if ART.exists():
+        for old in ART.glob("*.png"):
+            old.unlink()
+
+    total = 12
 
     slide_portada(slides, total)
     slide_agenda(slides, total)
@@ -453,7 +438,6 @@ def main():
     )
 
     slide_flujo(slides, total)
-    slide_etapas(slides, total)
     slide_cierre(slides, total)
 
     build_pdf(slides)

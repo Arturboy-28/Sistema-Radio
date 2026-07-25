@@ -7,7 +7,7 @@ Documento visual para prospecto, presentado por **Smart Apps**.
 - **PDF:** [`FM105-ONE-Presentacion-Prospecto.pdf`](./FM105-ONE-Presentacion-Prospecto.pdf)
 - **Slides PNG:** carpeta [`slides/`](./slides/)
 
-## Contenido (13 diapositivas)
+## Contenido (12 diapositivas)
 
 1. Portada  
 2. Agenda  
@@ -19,8 +19,7 @@ Documento visual para prospecto, presentado por **Smart Apps**.
 9. Audiencia y canales  
 10. Plataforma  
 11. Flujo de valor  
-12. Implementación por etapas  
-13. Cierre / siguientes pasos  
+12. Cierre  
 
 ## Logos
 
