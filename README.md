@@ -1,30 +1,22 @@
-# FM105 ONE — Borrador + demos para cliente
+# FM105 ONE — demos visuales para cliente
 
-Producto: sistema integral SaaS para radioemisoras (tenant piloto FM105 Guaymas).
+Mockups **PNG** alineados a la referencia ChatGPT (tema oscuro web + admin SaaS).
 
-## Para enviar al cliente
-
-Carpeta **[`cliente-demos/`](./cliente-demos/)** — mockups en **PNG** (estilo SaaS / ChatGPT):
+## Carpeta [`cliente-demos/`](./cliente-demos/)
 
 | Archivo | Contenido |
 | --- | --- |
-| `00-portada-demos.png` | Portada del paquete |
-| `01-portal-publico.png` | Sitio web público (radioescucha) |
-| `02-sistema-comercial.png` | Ventas / órdenes / KPIs |
-| `03-continuidad.png` | Operación al aire |
-| `04-dashboard-ceo.png` | KPIs gerenciales |
-| `05-app-movil.png` | App móvil (3 pantallas) |
-| `06-brochure-comercial.png` | Brochure comercial |
-| `07-mosaico-demos.png` | Vista junta de las 6 demos |
-
-Incluyen logo FM105 y fotos de Gerardo Castro, Iván Vaca, Karla Montaño y Ramón Barrera.
+| `00-portada-demos.png` | Portada |
+| `01-portal-publico.png` | Página web pública (oscuro, EN VIVO, Al Aire, Ahora Suena) |
+| `02-sistema-comercial.png` | Módulo Ventas — Órdenes de Transmisión |
+| `03-continuidad.png` | Continuidad al aire |
+| `04-dashboard-ceo.png` | KPI Gerenciales |
+| `05-app-movil.png` | App móvil |
+| `06-brochure-comercial.png` | Brochure |
+| `07-mosaico-demos.png` | Collage tipo referencia ChatGPT |
 
 ```bash
 python3 scripts/generar_demos_cliente.py
 ```
 
-## Documentación
-
-- [BORRADOR.md](./BORRADOR.md)
-
-> Solo borrador + demos visuales. Sin aplicación Laravel todavía.
+Documentación de producto: [BORRADOR.md](./BORRADOR.md)

@@ -11,11 +11,14 @@ Plataforma web **SaaS** moderna para administrar una radioemisora de forma integ
 
 | Área | Módulos |
 | --- | --- |
-| Público | Sitio web, streaming en vivo |
-| Operación | Programación, producción, continuidad |
-| Comercial | Ventas, CRM, clientes, facturación, cobranza |
-| Dirección | KPI gerenciales |
-| Canales | Aplicación móvil |
+| Público | Sitio web, streaming en vivo, podcast CMS, radio visual |
+| Operación | Programación, producción, continuidad, music scheduling, voice tracking, logger, newsroom |
+| Comercial | Ventas, CRM, inventario de aire, testigos, portal anunciante, comisiones, rate card |
+| Finanzas | Facturación CFDI, cobranza, pagos en línea, crédito |
+| Audiencia | Mensajes a cabina, concursos, encuestas, clubes, mapa de oyentes |
+| Dirección | KPI gerenciales, alertas, reportes |
+| Canales | App móvil, app operador, Alexa / smart speakers |
+| Plataforma | Multi-tenant whitelabel, integraciones (WhatsApp, Meta, Contpaqi, PAC) |
 
 El sistema debe ser **multiempresa (multi-tenant)** para venderse como SaaS a múltiples estaciones de radio.
 
@@ -79,26 +82,57 @@ Cada módulo debe poder mantenerse y ampliarse de forma independiente.
 
 ## 4. Menú principal (backoffice)
 
+### Núcleo
+
 1. Dashboard  
 2. Portal Público  
 3. Radio en Vivo  
-4. Noticias  
+4. Noticias / Newsroom  
 5. Programación  
 6. Locutores  
 7. Producción  
 8. Biblioteca de Audios  
 9. Continuidad  
-10. Ventas  
-11. Clientes  
-12. Cotizaciones  
-13. Campañas  
-14. Órdenes de Transmisión  
-15. Facturación  
-16. Cobranza  
-17. Reportes  
-18. KPIs  
-19. Usuarios  
-20. Configuración  
+10. Music Scheduling  
+11. Voice Tracking  
+12. Logger / Testigos  
+
+### Comercial y finanzas
+
+13. Clientes / CRM  
+14. Cotizaciones  
+15. Campañas  
+16. Órdenes de Transmisión  
+17. Inventario de aire (avails)  
+18. Rate card  
+19. Portal anunciante  
+20. Reconciliación orden ↔ aire  
+21. Comisiones de vendedores  
+22. Facturación CFDI  
+23. Cobranza y pagos en línea  
+24. Crédito / límites  
+
+### Audiencia y canales
+
+25. Mensajes a cabina  
+26. Concursos y dinámicas  
+27. Encuestas / votaciones  
+28. Clubes de oyentes  
+29. Mapa / analytics de oyentes  
+30. Podcast CMS  
+31. Radio visual  
+32. App móvil (oyentes)  
+33. App operador  
+34. Alexa / smart speakers  
+
+### Plataforma
+
+35. Alertas  
+36. Reportes / KPIs  
+37. Usuarios y roles  
+38. Integraciones  
+39. Whitelabel / multi-tenant  
+40. Configuración  
 
 ---
 
@@ -340,34 +374,96 @@ Streaming · Noticias · Programación · Locutores · Clientes · Ventas · Das
 
 ---
 
-## 19. Fases sugeridas (borrador de roadmap)
+## 19. Módulos ampliados (ideas incorporadas)
+
+Referencia de mercado: WideOrbit, Marketron, MediaAdmin (MX), RCS, Caster.fm.  
+**Estado:** incluidos en alcance de producto (borrador). Prioridad de construcción se define por fases.
+
+### 19.1 Alta prioridad FM105 / México
+
+| # | Módulo | Qué resuelve |
+| --- | --- | --- |
+| 1 | Testigos / Proof of Performance | Comprobante al anunciante de que el spot salió (hora exacta) |
+| 2 | Portal del cliente anunciante | El cliente ve campañas, spots TX, facturas y descarga testigos |
+| 3 | Inventario de aire (avails) | Horarios libres para vender por daypart |
+| 4 | Reconciliación automática | Cruza orden vendida vs lo transmitido realmente |
+| 5 | Logger de audio | Grabación 24/7 legal/operativa de la señal |
+
+### 19.2 Engagement / audiencia
+
+| # | Módulo | Qué resuelve |
+| --- | --- | --- |
+| 6 | Mensajes a cabina | Web + WhatsApp + app, con moderación |
+| 7 | Concursos y dinámicas | Premios, ganadores, historial |
+| 8 | Encuestas / votaciones | Interacción en vivo con oyentes |
+| 9 | Clubes de oyentes | Registro, puntos, beneficios |
+| 10 | Mapa de oyentes | Ciudad, picos, retención del stream |
+
+### 19.3 Contenido
+
+| # | Módulo | Qué resuelve |
+| --- | --- | --- |
+| 11 | Music scheduling | Rotación inteligente de música (estilo Selector/RCS) |
+| 12 | Voice tracking remoto | Locutor graba desde casa e inserta en parrilla |
+| 13 | Redacción / newsroom | Guiones, notas al aire, wire de noticias |
+| 14 | Podcast CMS | Episodios, RSS, stats de descargas |
+| 15 | Radio visual | Artwork/canción para YouTube / Facebook Live |
+
+### 19.4 Comercial avanzado
+
+| # | Módulo | Qué resuelve |
+| --- | --- | --- |
+| 16 | Paquetes + digital | Aire + redes + banner web en una cotización |
+| 17 | Comisiones de vendedores | Metas, ranking, liquidación |
+| 18 | Credit check / límites | Tope de crédito por cliente |
+| 19 | Pagos en línea | SPEI/tarjeta ligados a cobranza |
+| 20 | Rate card | Tarifas por horario y tipo de spot |
+
+### 19.5 Operación / SaaS
+
+| # | Módulo | Qué resuelve |
+| --- | --- | --- |
+| 21 | App de operador | Control remoto de continuidad / cabina |
+| 22 | Alertas | Stream caído, spot retrasado, cobranza vencida |
+| 23 | Whitelabel multi-tenant | Cada estación con su marca y dominio |
+| 24 | Integraciones | WhatsApp Business, Meta Ads, Contpaqi/Aspel, PAC CFDI |
+| 25 | Alexa / smart speakers | “Alexa, pon FM105” |
+
+---
+
+## 20. Fases sugeridas (borrador de roadmap)
 
 Sin programar aún; solo orden de valor:
 
 | Fase | Enfoque |
 | --- | --- |
-| 0 | Este borrador + identidad + estructura de módulos |
-| 1 | Auth, multi-tenant, usuarios/roles, configuración |
-| 2 | Portal público + streaming + programación + locutores |
-| 3 | Producción + continuidad |
-| 4 | CRM + ventas + órdenes de transmisión |
-| 5 | Facturación CFDI + cobranza |
-| 6 | Dashboards comercial y CEO |
-| 7 | App móvil + API completa |
+| 0 | Borrador + identidad + catálogo completo de módulos |
+| 1 | Auth, multi-tenant, usuarios/roles, configuración, alertas base |
+| 2 | Portal público + streaming + programación + locutores + newsroom |
+| 3 | Producción + continuidad + logger + testigos |
+| 4 | CRM + ventas + órdenes + inventario de aire + rate card |
+| 5 | Reconciliación + portal anunciante + comisiones + crédito |
+| 6 | Facturación CFDI + cobranza + pagos en línea |
+| 7 | Dashboards comercial/CEO + mapa de oyentes |
+| 8 | Engagement: mensajes, concursos, encuestas, clubes |
+| 9 | Music scheduling + voice tracking + podcast CMS + radio visual |
+| 10 | App móvil oyentes + app operador + Alexa + integraciones + whitelabel |
 
 ---
 
-## 20. Decisiones abiertas
+## 21. Decisiones abiertas
 
 - ¿App móvil nativa (Flutter/RN) o PWA primero?  
 - ¿Proveedor de facturación CFDI (PAC) preferido?  
 - ¿Hosting / aislamiento de tenants (DB compartida vs schema/DB por tenant)?  
 - ¿Prioridad de MVP interno FM105 vs producto SaaS multiestación desde el día 1?  
+- ¿Logger: grabación propia vs integración con equipo existente?  
+- ¿Voice tracking y music scheduling nativos o integración con terceros (RCS/Radix/etc.)?  
 - Assets: logo oficial, fotos de locutores, imágenes de estudio.  
 
 ---
 
-## 21. Assets para demos (recibidos)
+## 22. Assets para demos (recibidos)
 
 | Asset | Uso |
 | --- | --- |
@@ -379,26 +475,18 @@ Sin programar aún; solo orden de valor:
 
 Ubicación en repo: `demo/assets/`
 
-## 22. Demos para cliente (PNG)
+## 23. Demos para cliente (PNG)
 
-Paquete listo para enviar (estilo SaaS / referencia ChatGPT): carpeta `cliente-demos/`
-
-1. `01-portal-publico.png` — portal radioescucha  
-2. `02-sistema-comercial.png` — ventas  
-3. `03-continuidad.png` — operación al aire  
-4. `04-dashboard-ceo.png` — KPIs gerenciales  
-5. `05-app-movil.png` — app móvil  
-6. `06-brochure-comercial.png` — brochure  
-
+Paquete en carpeta `cliente-demos/` (referencia visual ChatGPT).  
 Regenerar: `python3 scripts/generar_demos_cliente.py`
 
-## 23. Próximos pasos
+## 24. Próximos pasos
 
-1. Validar demos con el cliente y ajustar textos/programas reales.  
-2. Definir MVP de FM105.  
-3. Wireframes faltantes (facturación, app móvil).  
-4. Recién después: scaffolding Laravel y módulos.
+1. Validar este catálogo ampliado de módulos.  
+2. Marcar qué entra en el **MVP FM105** vs fases posteriores.  
+3. Usar demos visuales de ChatGPT para presentación a cliente.  
+4. Recién después: scaffolding Laravel por módulos priorizados.
 
 ---
 
-*Documento de trabajo — FM105 ONE. Demos HTML únicamente; sin backend.*
+*Documento de trabajo — FM105 ONE. Sin implementación de backend.*
