@@ -381,13 +381,14 @@ Ubicación en repo: `demo/assets/`
 
 ## 22. Demos para cliente (PNG)
 
-Paquete listo para enviar: carpeta `cliente-demos/`
+Paquete listo para enviar (estilo SaaS / referencia ChatGPT): carpeta `cliente-demos/`
 
-1. `01-portal-publico.png`  
-2. `02-programacion.png`  
-3. `03-continuidad.png`  
-4. `04-clientes-crm.png`  
-5. `05-kpi-gerenciales.png`  
+1. `01-portal-publico.png` — portal radioescucha  
+2. `02-sistema-comercial.png` — ventas  
+3. `03-continuidad.png` — operación al aire  
+4. `04-dashboard-ceo.png` — KPIs gerenciales  
+5. `05-app-movil.png` — app móvil  
+6. `06-brochure-comercial.png` — brochure  
 
 Regenerar: `python3 scripts/generar_demos_cliente.py`
 
