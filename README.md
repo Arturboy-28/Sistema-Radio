@@ -20,3 +20,9 @@ python3 scripts/generar_demos_cliente.py
 ```
 
 Documentación de producto: [BORRADOR.md](./BORRADOR.md) — incluye catálogo ampliado de módulos (testigos, portal anunciante, inventario, engagement, music scheduling, etc.).
+
+## Presentación para prospecto
+
+- PDF: [`presentacion/FM105-ONE-Presentacion-Prospecto.pdf`](./presentacion/FM105-ONE-Presentacion-Prospecto.pdf)
+- Slides: [`presentacion/slides/`](./presentacion/slides/)
+- Presentado por **Smart Apps** para **FM105**
