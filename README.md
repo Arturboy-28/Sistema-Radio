@@ -15,6 +15,7 @@ Carpeta **[`cliente-demos/`](./cliente-demos/)** — mockups en **PNG** (estilo 
 | `04-dashboard-ceo.png` | KPIs gerenciales |
 | `05-app-movil.png` | App móvil (3 pantallas) |
 | `06-brochure-comercial.png` | Brochure comercial |
+| `07-mosaico-demos.png` | Vista junta de las 6 demos |
 
 Incluyen logo FM105 y fotos de Gerardo Castro, Iván Vaca, Karla Montaño y Ramón Barrera.
 
