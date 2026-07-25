@@ -1,7 +1,7 @@
-# Sistema-Radio
+# Sistema-Radio / FM105 ONE
 
-**Sistemaradiofusion** — borrador de producto.
+Borrador del producto **FM105 ONE** — sistema integral SaaS para radioemisoras (portal, streaming, operación, comercial, KPI y app).
 
-Por ahora este repositorio solo contiene documentación de trabajo. No hay código de aplicación.
+Este repositorio, por ahora, **solo contiene documentación**. No hay código de aplicación.
 
-- Ver [BORRADOR.md](./BORRADOR.md) para la idea, alcance MVP y decisiones abiertas.
+- Especificación de producto: [BORRADOR.md](./BORRADOR.md)
