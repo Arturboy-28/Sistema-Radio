@@ -367,14 +367,37 @@ Sin programar aún; solo orden de valor:
 
 ---
 
-## 21. Próximos pasos (sin código)
+## 21. Assets para demos (recibidos)
 
-1. Validar este borrador (módulos, menú, fases).  
-2. Definir qué entra en el **MVP de FM105**.  
-3. Reunir assets (logo, fotos, textos).  
-4. Wireframes del portal y del backoffice.  
-5. Recién después: scaffolding Laravel y módulos.
+| Asset | Uso |
+| --- | --- |
+| Logo FM105 (`logo2026final`) | Portal, menú admin, splash |
+| Gerardo Castro | Locutores / programación / continuidad |
+| Iván Vaca | Locutores / programación |
+| Karla Montaño | Locutores / programación |
+| Ramón Barrera E. | Locutores / programación |
+
+Ubicación en repo: `demo/assets/`
+
+## 22. Demos para cliente (PNG)
+
+Paquete listo para enviar: carpeta `cliente-demos/`
+
+1. `01-portal-publico.png`  
+2. `02-programacion.png`  
+3. `03-continuidad.png`  
+4. `04-clientes-crm.png`  
+5. `05-kpi-gerenciales.png`  
+
+Regenerar: `python3 scripts/generar_demos_cliente.py`
+
+## 23. Próximos pasos
+
+1. Validar demos con el cliente y ajustar textos/programas reales.  
+2. Definir MVP de FM105.  
+3. Wireframes faltantes (facturación, app móvil).  
+4. Recién después: scaffolding Laravel y módulos.
 
 ---
 
-*Documento de trabajo — FM105 ONE. Sin implementación de código.*
+*Documento de trabajo — FM105 ONE. Demos HTML únicamente; sin backend.*
